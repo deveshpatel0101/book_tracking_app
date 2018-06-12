@@ -1,0 +1,32 @@
+.display-books {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  width: 85%;
+  grid-gap: 3%;
+  padding: 0 3% 0 3%;
+}
+
+.display-books .book {
+  margin-top: 10%; 
+}
+
+@media screen and (max-width: 1020px) {
+  .display-books {
+    grid-template-columns: 33.33% 33.33% 33.33%;
+    width: 88%;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .display-books {
+    grid-template-columns: 50% 50%;
+    width: 91%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .display-books {
+    grid-template-columns: 100%;
+    width: 94%;
+  }
+}
