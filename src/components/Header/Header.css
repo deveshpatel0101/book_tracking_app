@@ -1,0 +1,13 @@
+.my-books {
+  color: white;
+  text-decoration: none;
+}
+
+.my-books:hover {
+  color: #cacaca;
+}
+
+.search-button {
+  color: white;
+  text-decoration: none;
+}

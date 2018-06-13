@@ -20,7 +20,21 @@ export const get = (bookId) =>
 export const getAll = () =>
   fetch(`${api}/books`, { headers })
     .then(res => res.json())
-    .then(data => data.books)
+    .then(data => {
+      let reading, read, wantToRead;
+      reading = read = wantToRead = 0;
+      data.books.forEach((book) => {
+        if(book.shelf === 'currentlyReading') {
+          reading++;
+        }else if(book.shelf === 'read') {
+          read++;
+        }else {
+          wantToRead++;
+        }        
+      });
+      data.books.push(reading, wantToRead, read);
+      return data.books;
+    })
 
 export const update = (book, shelf) =>
   fetch(`${api}/books/${book.id}`, {
