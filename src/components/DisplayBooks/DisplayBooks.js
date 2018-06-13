@@ -1,6 +1,5 @@
 import React from 'react';
 import './DisplayBooks.css';
-import Book from '../Book/Book';
 import BookShelves from '../BookShelves/BookShelves';
 import { getAll } from '../../controllers/BooksAPI';
 
@@ -34,26 +33,43 @@ class DisplayBooks extends React.Component {
     }
     return (
       <div>
-        
-        {this.state.result && !(this.props.result) ? (this.state.result[this.state.result.length - 3] !== 0 ? (<h2 className="category-heading">Currently Reading</h2>) : null) : null}
+        {this.state.result ? null : this.showShelves()}
+        {/* Below complete curly brackets checks if there are any books in specific shelf, if so then only
+          render heading of that shelf accordingly.        
+        */}
+        {
+          this.state.result ?
+            (this.state.result[this.state.result.length - 3] !== 0 ?
+              (<h2 className="category-heading">Currently Reading</h2>) :
+              null) :
+            null
+        }
         <div className="display-books">
-          {this.props.result ?
-            this.props.result.map(book => {
-              return <Book book={book} key={book.id} />
-            }) :
-            (this.state.result ? currentlyReading : this.showShelves())}
+          {this.state.result ? currentlyReading : null}
         </div>
-        
-        {this.state.result && !(this.props.result) ? (this.state.result[this.state.result.length - 2] !== 0 ? (<h2 className="category-heading">Want To Read</h2>) : null) : null}
+
+        {
+          this.state.result ?
+            (this.state.result[this.state.result.length - 2] !== 0 ?
+              (<h2 className="category-heading">Want To Read</h2>) :
+              null) :
+            null
+        }
         <div className="display-books">
-          {!(this.props.result) && this.state.result ? wantToRead : null}
+          {this.state.result ? wantToRead : null}
         </div>
-        
-        {this.state.result && !(this.props.result) ? (this.state.result[this.state.result.length - 1] !== 0 ? (<h2 className="category-heading">Read</h2>) : null) : null}
+
+        {
+          this.state.result ?
+            (this.state.result[this.state.result.length - 1] !== 0 ?
+              (<h2 className="category-heading">Read</h2>) :
+              null) :
+            null
+        }
         <div className="display-books">
-          {!(this.props.result) && this.state.result ? read : null}
+          {this.state.result ? read : null}
         </div>
-        
+
       </div>
     );
   }

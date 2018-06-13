@@ -27,7 +27,11 @@ class BookShelves extends React.Component {
       <div className="category">
         <div className='book'>
           <Card>
-            <img src={this.props.book.imageLinks.thumbnail} title="Contemplative Reptile" className='book-cover' />
+            <img
+              src={this.props.book.imageLinks.thumbnail}
+              title="Contemplative Reptile"
+              className='book-cover'
+            />
             <CardContent>
               <Typography variant="body2" gutterBottom>
                 {this.props.book.title}

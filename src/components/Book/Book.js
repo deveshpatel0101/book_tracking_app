@@ -9,28 +9,31 @@ class Book extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.state = {
-      value: 'addTo'
+      value: 'addTo',
+      count: 1
     }
   }
+
   handleChange(e) {
     e.preventDefault();
     let newData = {
-      title: this.props.book.title,
-      pages: this.props.book.page,
-      publish: this.props.book.publish,
       id: this.props.book.id
     };
     update(newData, e.target.value).then(response => {
       console.log('updated', response);
+      this.setState(() => ({ value: e.target.value, count: 0 }));
     });
-    this.setState(() => ({ value: e.target.value }));
   }
 
   render() {
     return (
       <div className='book'>
         <Card>
-          <img src={this.props.book.imageLinks.thumbnail} title="Contemplative Reptile" className='book-cover' />
+          <img
+            src={this.props.book.imageLinks.thumbnail}
+            title="Contemplative Reptile"
+            className='book-cover'
+          />
           <CardContent>
             <Typography variant="body2" gutterBottom>
               {this.props.book.title}
@@ -45,7 +48,11 @@ class Book extends React.Component {
 
           <form>
             <FormControl className='select'>
-              <Select value={this.state.value} onChange={this.handleChange}>
+              <Select value={this.props.book.shelf && this.state.count ?
+                (this.props.book.shelf) :
+                (this.state.value)}
+                onChange={this.handleChange}
+              >
                 <MenuItem value={'addTo'}>Add To</MenuItem>
                 <MenuItem value={'currentlyReading'}>Reading</MenuItem>
                 <MenuItem value={'wantToRead'}>Want to Read</MenuItem>
