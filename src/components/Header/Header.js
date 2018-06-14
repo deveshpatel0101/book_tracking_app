@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import './Header.css';
 
 const Header = () => (
-  <div className='header'>
+  <div className='header' role="navigation">
     <AppBar position="static">
       <Toolbar>
         <Typography variant="title" color="inherit">

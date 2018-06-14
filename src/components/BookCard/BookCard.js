@@ -53,8 +53,8 @@ class BookCard extends React.Component {
                 Authors:
                 {this.props.book.authors.map((author, value, all) => (
                   value === all.length - 1 ?
-                    `${author}` :
-                    `${author}, `)
+                    ` ${author}` :
+                    ` ${author},`)
                 )}
               </Typography> :
               null
@@ -77,9 +77,10 @@ class BookCard extends React.Component {
 
           <form>
             <FormControl className='select'>
-              <Select value={this.props.book.shelf && this.state.count ?
-                (this.props.book.shelf) :
-                (this.state.value)}
+              <Select
+                value={this.props.book.shelf && this.state.count ?
+                  (this.props.book.shelf) :
+                  (this.state.value)}
                 onChange={this.handleChange}
               >
                 <MenuItem value={'none'}>None</MenuItem>

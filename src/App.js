@@ -18,7 +18,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Route path='/' component={MainPage} exact={true}/>
+          <Route path='/' component={MainPage} exact={true} />
           <Route path='/search' component={BookSearch} />
         </div>
       </BrowserRouter>
