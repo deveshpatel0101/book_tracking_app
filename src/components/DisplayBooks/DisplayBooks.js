@@ -1,12 +1,13 @@
 import React from 'react';
 import './DisplayBooks.css';
-import BookShelves from '../BookShelves/BookShelves';
+import BookCard from '../BookCard/BookCard';
 import { getAll } from '../../controllers/BooksAPI';
 
 class DisplayBooks extends React.Component {
   constructor(props) {
     super(props);
     this.showShelves = this.showShelves.bind(this);
+    this.updatedShelf = this.updatedShelf.bind(this);
     this.state = {
       result: null
     }
@@ -18,17 +19,30 @@ class DisplayBooks extends React.Component {
     });
   }
 
+  updatedShelf(bookId, shelf) {
+    this.state.result.map((book, value, all) => {
+      if(book.id === bookId) {
+        this.setState((prevState) => {
+          let temp = prevState.result;
+          temp[value].shelf = shelf;
+          return {result: temp}
+        });
+      }
+      return null;
+    });
+  }
+
   render() {
     let currentlyReading, read, wantToRead;
     if (this.state.result) {
-      currentlyReading = this.state.result.map((book, value, all) => {
-        return book.shelf === 'currentlyReading' ? (<BookShelves book={book} key={book.id} header={value} />) : null
+      currentlyReading = this.state.result.map(book => {
+        return book.shelf === 'currentlyReading' ? (<BookCard book={book} key={book.id} update={this.updatedShelf} />) : null;
       });
-      read = this.state.result.map((book, value, all) => {
-        return book.shelf === 'read' ? (<BookShelves book={book} key={book.id} header={value} />) : null
+      read = this.state.result.map(book => {
+        return book.shelf === 'read' ? (<BookCard book={book} key={book.id} update={this.updatedShelf} />) : null;
       });
-      wantToRead = this.state.result.map((book, value, all) => {
-        return book.shelf === 'wantToRead' ? (<BookShelves book={book} key={book.id} header={value} />) : null
+      wantToRead = this.state.result.map(book => {
+        return book.shelf === 'wantToRead' ? (<BookCard book={book} key={book.id} update={this.updatedShelf} />) : null;
       });
     }
     return (

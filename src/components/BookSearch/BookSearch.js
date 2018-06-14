@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextField, Button } from '@material-ui/core';
-import Book from '../Book/Book';
+import BookCard from '../BookCard/BookCard';
 import Header from '../Header/Header';
 import { search, getAll } from '../../controllers/BooksAPI';
 import './BookSearch.css';
@@ -38,7 +38,7 @@ class BookSearch extends React.Component {
         }
       });
     } else {
-      alert('something');
+      alert('Valid input field is required.');
     }
   }
 
@@ -72,7 +72,7 @@ class BookSearch extends React.Component {
           {
             this.state.query !== '' ?
               (this.state.response.map(book => {
-                return <Book book={book} key={book.id} />
+                return <BookCard book={book} key={book.id} />
               })) :
               null
           }
