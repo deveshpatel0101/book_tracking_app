@@ -17,15 +17,20 @@ class BookCard extends React.Component {
     e.preventDefault();
     const temp = e.target.value;
     let newData = {
-      id: this.props.book.id
+      id: this.props.book.id,
+      title: this.props.book.title,
+      imageLinks: this.props.book.imageLinks,
+      authors: this.props.book.authors,
+      pageCount: this.props.book.pageCount,
+      publishedDate: this.props.book.publishedDate
     };
-    update(newData, temp).then(() => {
-      if (this.props.update) {
-        this.props.update(this.props.book.id, temp);
-      } else {
+    if (this.props.update) {
+      this.props.update(newData, temp);
+    } else {
+      update(newData, temp).then((res) => {
         this.setState(() => ({ value: e.target.value, count: 0 }));
-      }
-    });
+      });
+    }
   }
 
   render() {
